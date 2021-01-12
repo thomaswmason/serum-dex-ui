@@ -1,5 +1,5 @@
 import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
-import TradePage from './pages/TradePage';
+
 import OpenOrdersPage from './pages/OpenOrdersPage';
 import React from 'react';
 import BalancesPage from './pages/BalancesPage';
@@ -10,6 +10,9 @@ import NewPoolPage from './pages/pools/NewPoolPage';
 import PoolPage from './pages/pools/PoolPage';
 import PoolListPage from './pages/pools/PoolListPage';
 import { getTradePageUrl } from './utils/markets';
+import HomePage from './pages/HomePage';
+import ExplorePage from './pages/ExplorePage';
+import TradePage from './pages/TradePage';
 
 export function Routes() {
   return (
@@ -17,6 +20,12 @@ export function Routes() {
       <HashRouter basename={'/'}>
         <BasicLayout>
           <Switch>
+            <Route exact path="/solible">
+              <HomePage />
+            </Route>
+            <Route exact path="/explore">
+              <ExplorePage />
+            </Route>
             <Route exact path="/">
               <Redirect to={getTradePageUrl()} />
             </Route>

@@ -2,19 +2,21 @@ import React from 'react';
 import { Layout, Row, Col, Grid } from 'antd';
 import Link from './Link';
 import { helpUrls } from './HelpUrls';
+import logo from '../assets/solible-logo.svg';
+import discord from '../assets/social/discord.svg';
+import telegram from '../assets/social/telegram.svg';
+import twitter from '../assets/social/twitter.svg';
+
 const { Footer } = Layout;
 const { useBreakpoint } = Grid;
 
 const footerElements = [
   {
-    description: 'Serum Developer Resources',
-    link: helpUrls.developerResources,
+    description: 'Twitter',
+    link: helpUrls.twitter,
   },
-  { description: 'Discord', link: helpUrls.discord },
-  { description: 'Telegram', link: helpUrls.telegram },
-  { description: 'GitHub', link: helpUrls.github },
-  { description: 'Project Serum', link: helpUrls.projectSerum },
-  { description: 'Solana Network', link: helpUrls.solanaBeach },
+  { description: 'Support', link: helpUrls.support },
+  { description: 'Bonfida', link: helpUrls.bonfida },
 ];
 
 export const CustomFooter = () => {
@@ -23,27 +25,59 @@ export const CustomFooter = () => {
   return (
     <Footer
       style={{
-        height: '45px',
+        height: '60px',
         paddingBottom: 10,
         paddingTop: 10,
+        background: '#121837',
       }}
     >
-      <Row align="middle" gutter={[16, 4]}>
+      <Row align="middle" justify="space-around">
+        <Col>
+          <img src={logo} />
+        </Col>
         {!smallScreen && (
-          <>
-            <Col flex="auto" />
+          <Col>
             {footerElements.map((elem, index) => {
               return (
-                <Col key={index + ''}>
-                  <Link external to={elem.link}>
-                    {elem.description}
-                  </Link>
-                </Col>
+                <Link
+                  key={`footer-elem-${index}-${elem.description}`}
+                  external
+                  to={elem.link}
+                  style={{
+                    color: 'rgba(255, 255, 255, 0.6)',
+                    textTransform: 'uppercase',
+                    paddingLeft: 20,
+                    paddingRight: 20,
+                  }}
+                >
+                  {elem.description}
+                </Link>
               );
             })}
-          </>
+          </Col>
         )}
-        <Col flex="auto">{/*  <DexProgramSelector />*/}</Col>
+        <Col>
+          <img
+            src={discord}
+            style={{ height: 25, cursor: 'pointer' }}
+            onClick={() => (window.location.href = helpUrls.discord)}
+          />
+          <img
+            src={telegram}
+            style={{
+              height: 20,
+              marginRight: 25,
+              marginLeft: 25,
+              cursor: 'pointer',
+            }}
+            onClick={() => (window.location.href = helpUrls.telegram)}
+          />
+          <img
+            src={twitter}
+            style={{ height: 20, cursor: 'pointer' }}
+            onClick={() => (window.location.href = helpUrls.twitter)}
+          />
+        </Col>
       </Row>
     </Footer>
   );

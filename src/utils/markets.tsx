@@ -41,13 +41,23 @@ import {
 import { WRAPPED_SOL_MINT } from '@project-serum/serum/lib/token-instructions';
 import { Order } from '@project-serum/serum/lib/market';
 import BonfidaApi from './bonfidaConnector';
+import { getNftList } from './nfts';
 
 // Used in debugging, should be false in production
 const _IGNORE_DEPRECATED = false;
 
-export const USE_MARKETS: MarketInfo[] = _IGNORE_DEPRECATED
+export let USE_MARKETS: MarketInfo[] = _IGNORE_DEPRECATED
   ? MARKETS.map((m) => ({ ...m, deprecated: false }))
   : MARKETS;
+
+getNftList().forEach((nft) => {
+  USE_MARKETS.push({
+    name: nft.name,
+    address: nft.marketAddress,
+    programId: new PublicKey('EUqojwWA2rd19FZrzeBncJsm38Jm1hEhE3zsmX3bRc2o'),
+    deprecated: false,
+  });
+});
 
 export function useMarketsList() {
   return USE_MARKETS.filter(({ deprecated }) => !deprecated);
@@ -569,14 +579,19 @@ export function useTrades(limit = 100) {
 }
 
 export function useLocallyStoredFeeDiscountKey(): {
-  storedFeeDiscountKey: PublicKey | undefined,
-  setStoredFeeDiscountKey: (key: string) => void
+  storedFeeDiscountKey: PublicKey | undefined;
+  setStoredFeeDiscountKey: (key: string) => void;
 } {
-  const [storedFeeDiscountKey, setStoredFeeDiscountKey] = useLocalStorageState<string>(`feeDiscountKey`, undefined);
+  const [
+    storedFeeDiscountKey,
+    setStoredFeeDiscountKey,
+  ] = useLocalStorageState<string>(`feeDiscountKey`, undefined);
   return {
-    storedFeeDiscountKey: storedFeeDiscountKey ? new PublicKey(storedFeeDiscountKey) : undefined,
-    setStoredFeeDiscountKey
-  }
+    storedFeeDiscountKey: storedFeeDiscountKey
+      ? new PublicKey(storedFeeDiscountKey)
+      : undefined,
+    setStoredFeeDiscountKey,
+  };
 }
 
 export function useFeeDiscountKeys(): [
@@ -603,12 +618,15 @@ export function useFeeDiscountKeys(): [
     if (!market) {
       return null;
     }
-    const feeDiscountKey = await market.findFeeDiscountKeys(connection, wallet.publicKey);
+    const feeDiscountKey = await market.findFeeDiscountKeys(
+      connection,
+      wallet.publicKey,
+    );
     if (feeDiscountKey) {
-      setStoredFeeDiscountKey(feeDiscountKey[0].pubkey.toBase58())
+      setStoredFeeDiscountKey(feeDiscountKey[0].pubkey.toBase58());
     }
     return feeDiscountKey;
-  }
+  };
   return useAsyncData(
     getFeeDiscountKeys,
     tuple('getFeeDiscountKeys', wallet, market, connected),
