@@ -12,6 +12,7 @@ import { notify } from '../utils/notifications';
 import { Connection } from '@solana/web3.js';
 import WalletConnect from './WalletConnect';
 import { getTradePageUrl } from '../utils/markets';
+import SearchBar from './SearchBar';
 
 const LogoWrapper = styled.div`
   display: flex;
@@ -94,11 +95,11 @@ export default function TopBar(): JSX.Element {
         justify="space-around"
         style={{ background: '#121837' }}
       >
-        <LogoWrapper onClick={() => history.push(tradePageUrl)}>
+        <LogoWrapper onClick={() => history.push('/')}>
           <img src={logo} alt="" />
           {'Solible'}
         </LogoWrapper>
-
+        <SearchBar />
         {connected && (
           <div>
             <Popover
@@ -114,22 +115,33 @@ export default function TopBar(): JSX.Element {
             </Popover>
           </div>
         )}
-
         <Col>
           <Row justify="space-around" style={{ fontWeight: 600, fontSize: 16 }}>
-            <Col>EXPLORE</Col>
-            <Col style={{ paddingRight: 70, paddingLeft: 70 }}>FAQ</Col>
+            <Col
+              style={{ cursor: 'pointer' }}
+              onClick={() => history.push('/explore')}
+            >
+              EXPLORE
+            </Col>
+            <Col
+              style={{ paddingRight: 70, paddingLeft: 70, cursor: 'pointer' }}
+              onClick={() =>
+                (window.location.href = 'https://help.bonfida.com')
+              }
+            >
+              FAQ
+            </Col>
             <Col>
               <WalletConnect />
-              <div>
-                <Select onSelect={setProvider} value={providerUrl}>
-                  {WALLET_PROVIDERS.map(({ name, url }) => (
-                    <Select.Option value={url} key={url}>
-                      {name}
-                    </Select.Option>
-                  ))}
-                </Select>
-              </div>
+            </Col>
+            <Col style={{ marginLeft: 20 }}>
+              <Select onSelect={setProvider} value={providerUrl}>
+                {WALLET_PROVIDERS.map(({ name, url }) => (
+                  <Select.Option value={url} key={url}>
+                    {name}
+                  </Select.Option>
+                ))}
+              </Select>
             </Col>
           </Row>
         </Col>

@@ -3,6 +3,7 @@ import { Row, Col } from 'antd';
 import TradePanel from '../components/TradePanel';
 import { MarketProvider, getTradePageUrl } from '../utils/markets';
 import { useParams, useHistory } from 'react-router-dom';
+import MoreNfts from '../components/MoreNfts';
 
 const TradePage = () => {
   const { marketAddress } = useParams();
@@ -24,6 +25,8 @@ const TradePage = () => {
       <Row justify="center" style={{ paddingTop: 50 }}>
         <TradePanel />
       </Row>
+
+      <MoreNfts />
     </MarketProvider>
   );
 };

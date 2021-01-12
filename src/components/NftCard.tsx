@@ -9,6 +9,7 @@ import {
   useSupply,
 } from '../utils/nfts/utils';
 import { useHistory } from 'react-router-dom';
+import LazyLoad from 'react-lazyload';
 
 export const RedeemableTag = (): JSX.Element => {
   return <div className="redeemable-tag">Redeemable</div>;
@@ -42,18 +43,22 @@ export const NftCard = ({
     <div className="nft-card" onClick={onClick}>
       {nft.redeembable && <RedeemableTag />}
       {nft.type === 'IMAGE' ? (
-        <img
-          // @ts-ignore
-          src={nft.imgSmall}
-        />
-      ) : (
-        <video width="400" muted loop autoPlay playsInline>
-          <source
+        <LazyLoad height={300}>
+          <img
             // @ts-ignore
             src={nft.imgSmall}
-            type="video/mp4"
           />
-        </video>
+        </LazyLoad>
+      ) : (
+        <LazyLoad height={300}>
+          <video width="400" muted loop autoPlay playsInline>
+            <source
+              // @ts-ignore
+              src={nft.imgSmall}
+              type="video/mp4"
+            />
+          </video>
+        </LazyLoad>
       )}
       <div className="bottom">
         <Row justify="space-between">

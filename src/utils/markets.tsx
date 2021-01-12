@@ -4,7 +4,7 @@ import {
   MARKETS,
   OpenOrders,
   Orderbook,
-  TOKEN_MINTS,
+  TOKEN_MINTS as OFFICIAL_TOKENS,
   TokenInstructions,
 } from '@project-serum/serum';
 import { PublicKey } from '@solana/web3.js';
@@ -50,12 +50,18 @@ export let USE_MARKETS: MarketInfo[] = _IGNORE_DEPRECATED
   ? MARKETS.map((m) => ({ ...m, deprecated: false }))
   : MARKETS;
 
+let TOKEN_MINTS = OFFICIAL_TOKENS;
+
 getNftList().forEach((nft) => {
   USE_MARKETS.push({
     name: nft.name,
     address: nft.marketAddress,
     programId: new PublicKey('EUqojwWA2rd19FZrzeBncJsm38Jm1hEhE3zsmX3bRc2o'),
     deprecated: false,
+  });
+  TOKEN_MINTS.push({
+    name: nft.name,
+    address: nft.mintAddress,
   });
 });
 

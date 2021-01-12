@@ -6,14 +6,23 @@ import { NftCard } from '../components/NftCard';
 import { NftPanelDisplayHomePage } from '../components/NftPanelDisplay';
 import { getRedeemableNftList, getNonRedeemableNftList } from '../utils/nfts';
 import waves from '../assets/homepage/bonfida_waves.svg';
+import { useHistory } from 'react-router-dom';
 
 const HomePageHeader = (): JSX.Element => {
+  const history = useHistory();
   return (
     <>
       <h1 className="homepage-title">The marketplace for redeemable NFTs</h1>
       <h2 className="homepage-subtitle">Spend crypto on real life products</h2>
       <Row align="middle" justify="center" style={{ paddingTop: 20 }}>
-        <Button className="btn-explore-marketplace">Explore marketplace</Button>
+        <Button
+          className="btn-explore-marketplace"
+          onClick={() => {
+            history.push('/explore');
+          }}
+        >
+          Explore marketplace
+        </Button>
       </Row>
     </>
   );
