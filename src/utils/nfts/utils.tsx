@@ -111,7 +111,7 @@ export const useBestBid = (address: PublicKey | undefined): number | null => {
       setBestBid(bb[0] && bb[0][0] ? bb[0][0] : null);
     };
     get();
-  }, [connection]);
+  }, [connection, address]);
 
   return bestBid;
 };
@@ -131,7 +131,7 @@ export const useBestAsk = (address: PublicKey | undefined): number | null => {
       setBestAsk(ba[0] && ba[0][0] ? ba[0][0] : null);
     };
     get();
-  }, [connection]);
+  }, [connection, address]);
 
   return bestAsk;
 };
@@ -152,7 +152,7 @@ export const useMarkPrice = (address: PublicKey): number | null => {
       setPrice((ba[0][0] + bb[0][0]) / 2);
     };
     get();
-  }, [connection]);
+  }, [connection, address]);
 
   return price;
 };

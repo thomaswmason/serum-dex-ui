@@ -3,13 +3,11 @@ import { Button, Col, Row, Input, Space, Grid } from 'antd';
 import { findNftFromMarket } from '../utils/nfts/utils';
 import {
   useMarket,
-  useTokenAccounts,
   useBalances,
   useSelectedBaseCurrencyAccount,
   useSelectedQuoteCurrencyAccount,
   useFeeDiscountKeys,
   useLocallyStoredFeeDiscountKey,
-  useAllOpenOrders,
   useOpenOrders,
 } from '../utils/markets';
 import { NFT } from '../utils/nfts';
@@ -37,7 +35,7 @@ const TradeForm = ({ nft }: { nft: NFT }): JSX.Element => {
   const history = useHistory();
   const [bidPrice, setBidPrice] = useState<string | null>(null);
   const [askPrice, setAskPrice] = useState<string | null>(null);
-  const { wallet, connected } = useWallet();
+  const { wallet } = useWallet();
   const [hasNft, setHasNft] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const balances = useBalances();
@@ -62,7 +60,7 @@ const TradeForm = ({ nft }: { nft: NFT }): JSX.Element => {
         setOpenOrder(o);
       }
     });
-  }, [loaded]);
+  }, [loaded, nft, openOrders]);
 
   useEffect(() => {
     balances?.forEach((b) => {
@@ -71,9 +69,7 @@ const TradeForm = ({ nft }: { nft: NFT }): JSX.Element => {
         setHasNft(true);
       }
     });
-  }, [balances]);
-
-  console.log(openOrder);
+  }, [balances, openOrders, nft]);
 
   const { market } = useMarket();
   const bestBid = useBestBid(market?.address);
@@ -455,7 +451,7 @@ const TradePanel = (): JSX.Element | null => {
         setHasNft(true);
       }
     });
-  }, [balances]);
+  }, [balances, nft]);
   if (!nft) {
     return null;
   }
@@ -480,6 +476,7 @@ const TradePanel = (): JSX.Element | null => {
           <img
             // @ts-ignore
             src={nft.img}
+            alt=""
           />
         </Col>
         <Col flex="auto" />

@@ -7,6 +7,7 @@ import {
   Spin as SpinAntd,
   Row,
   Col,
+  Alert,
 } from 'antd';
 import {
   LoadingOutlined,
@@ -70,7 +71,6 @@ const RedeemForm = ({
   nftMint: PublicKey;
   destination: PublicKey;
 }) => {
-  const [step, setStep] = useState(1);
   const [submitting, setSubmitting] = useState(false);
   const connection = useConnection();
   const { wallet } = useWallet();
@@ -318,10 +318,21 @@ const RedeemForm = ({
             </Form.Item>
           </Form>
           {submitted && (
-            <div style={{ fontWeight: 600, fontSize: 24, textAlign: 'center' }}>
-              Successfully redeemed. You will receive an email shortly to
-              confirm the redemption
-            </div>
+            <Alert
+              style={{
+                background: 'transparent',
+                border: '1px solid',
+                borderColor: '#51D07B',
+              }}
+              message={
+                <div style={{ fontSize: 14, textAlign: 'start' }}>
+                  Successfully redeemed. You will receive an email shortly to
+                  confirm the redemption
+                </div>
+              }
+              type="success"
+              showIcon
+            />
           )}
           <Help />
         </Col>
@@ -347,7 +358,7 @@ const Help = () => {
   );
 };
 
-const NftImage = ({ nft }: { nft: NFT }) => {
+export const NftImage = ({ nft }: { nft: NFT }) => {
   return (
     <div
       style={{
@@ -370,6 +381,7 @@ const NftImage = ({ nft }: { nft: NFT }) => {
           //@ts-ignore
           src={nft.imgSmall}
           style={{ margin: 'auto' }}
+          alt=""
         />
       </Row>
     </div>

@@ -4,7 +4,6 @@ import { PublicKey } from '@solana/web3.js';
 import {
   findNftFromMint,
   useBestAsk,
-  useBestBid,
   useQuoteFromMarketAddress,
   useSupply,
 } from '../utils/nfts/utils';
@@ -26,7 +25,6 @@ export const NftCard = ({
 }): JSX.Element | null => {
   const nft = findNftFromMint(mintAddress);
   const bestAsk = useBestAsk(nft?.marketAddress);
-  const bestBid = useBestBid(nft?.marketAddress);
   const quoteCurrency = useQuoteFromMarketAddress(nft?.marketAddress);
   const supply = useSupply(mintAddress);
 
@@ -47,6 +45,7 @@ export const NftCard = ({
           <img
             // @ts-ignore
             src={nft.imgSmall}
+            alt=""
           />
         </LazyLoad>
       ) : (

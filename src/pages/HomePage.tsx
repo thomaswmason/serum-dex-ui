@@ -1,8 +1,5 @@
 import React from 'react';
-import { Button, Row, Col } from 'antd';
-import { useBestBid } from '../utils/nfts/utils';
-import { PublicKey } from '@solana/web3.js';
-import { NftCard } from '../components/NftCard';
+import { Button, Row } from 'antd';
 import { NftPanelDisplayHomePage } from '../components/NftPanelDisplay';
 import { getRedeemableNftList, getNonRedeemableNftList } from '../utils/nfts';
 import waves from '../assets/homepage/bonfida_waves.svg';

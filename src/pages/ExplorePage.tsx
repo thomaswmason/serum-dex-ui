@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Row, Col } from 'antd';
 import { NftCard } from '../components/NftCard';
 import { getNftList } from '../utils/nfts';
@@ -12,7 +12,6 @@ const ExplorePage = (): JSX.Element => {
 
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const redeemable = params.get('redeemable');
   const keywords = params.get('keywords')?.split('-');
 
   // TODO Filter pour redeembale et sort option on the side

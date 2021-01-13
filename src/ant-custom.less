@@ -144,6 +144,9 @@
   font-weight: 12px;
   width: 100px;
   text-align: center;
+  position: relative;
+  top: 10px;
+  left: 15px;
   z-index: 1;
 }
 
@@ -167,6 +170,9 @@
   font-weight: 12px;
   width: 120px;
   text-align: center;
+  position: relative;
+  top: 10px;
+  left: 15px;
   z-index: 1;
 }
 
@@ -249,7 +255,15 @@
 }
 
 .ant-btn-primary {
-  background-color: #4747f0;
+  background-color: transparent;
+  &:hover {
+    background-color: #4747f0;
+    border-color: #4747f0;
+  }
+  &:focus {
+    background-color: #4747f0;
+    border-color: #4747f0;
+  }
   border-color: #4747f0;
 }
 
@@ -291,3 +305,5 @@
     height: 300px;
   }
 }
+
+@switch-color: #4747f0;

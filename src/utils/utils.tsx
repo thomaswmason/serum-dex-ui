@@ -1,6 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { PublicKey } from '@solana/web3.js';
+import { PublicKey, Connection, AccountInfo } from '@solana/web3.js';
+import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import BN from 'bn.js';
+import { getTokenAccountInfo } from './tokens';
+import { connect } from 'http2';
 
 export function isValidPublicKey(key) {
   if (!key) {
@@ -39,10 +42,18 @@ export function roundToDecimal(
 }
 
 export function getDecimalCount(value): number {
-  if (!isNaN(value) && Math.floor(value) !== value && value.toString().includes('.'))
+  if (
+    !isNaN(value) &&
+    Math.floor(value) !== value &&
+    value.toString().includes('.')
+  )
     return value.toString().split('.')[1].length || 0;
-  if (!isNaN(value) && Math.floor(value) !== value && value.toString().includes('e'))
-    return parseInt(value.toString().split(('e-'))[1] || "0");
+  if (
+    !isNaN(value) &&
+    Math.floor(value) !== value &&
+    value.toString().includes('e')
+  )
+    return parseInt(value.toString().split('e-')[1] || '0');
   return 0;
 }
 
@@ -152,3 +163,40 @@ export function isEqual(obj1, obj2, keys) {
   }
   return true;
 }
+
+export const useTokenAccounts = (owner: PublicKey, connection: Connection) => {
+  const [tokenAccounts, setTokenAccounts] = useState<Array<string>>([]);
+  const [loaded, setLoaded] = useState(false);
+  useEffect(() => {
+    let filter = { programId: TOKEN_PROGRAM_ID };
+    const get = async () => {
+      if (!owner || !connection) {
+        return;
+      } else {
+        const accounts = await connection.getTokenAccountsByOwner(
+          owner,
+          filter,
+        );
+
+        for (let i = 0; i < accounts.value.length; i++) {
+          const balance = await connection.getTokenAccountBalance(
+            accounts.value[i].pubkey,
+          );
+          const info = await connection.getParsedAccountInfo(
+            accounts.value[i].pubkey,
+          );
+          if (balance.value.uiAmount > 1) {
+            setTokenAccounts((prev) => [
+              ...prev,
+              // @ts-ignore
+              info.value?.data.parsed.info.mint,
+            ]);
+          }
+        }
+      }
+      setLoaded(true);
+    };
+    get();
+  }, [owner]);
+  return { balances: tokenAccounts, loaded };
+};

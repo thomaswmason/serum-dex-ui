@@ -33,7 +33,7 @@ export const CustomFooter = () => {
     >
       <Row align="middle" justify="space-around">
         <Col>
-          <img src={logo} />
+          <img src={logo} alt="" />
         </Col>
         {!smallScreen && (
           <Col>
@@ -61,6 +61,7 @@ export const CustomFooter = () => {
             src={discord}
             style={{ height: 25, cursor: 'pointer' }}
             onClick={() => (window.location.href = helpUrls.discord)}
+            alt=""
           />
           <img
             src={telegram}
@@ -71,11 +72,13 @@ export const CustomFooter = () => {
               cursor: 'pointer',
             }}
             onClick={() => (window.location.href = helpUrls.telegram)}
+            alt=""
           />
           <img
             src={twitter}
             style={{ height: 20, cursor: 'pointer' }}
             onClick={() => (window.location.href = helpUrls.twitter)}
+            alt=""
           />
         </Col>
       </Row>

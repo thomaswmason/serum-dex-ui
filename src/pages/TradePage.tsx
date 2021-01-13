@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Row, Col } from 'antd';
+import { Row } from 'antd';
 import TradePanel from '../components/TradePanel';
 import { MarketProvider, getTradePageUrl } from '../utils/markets';
 import { useParams, useHistory } from 'react-router-dom';

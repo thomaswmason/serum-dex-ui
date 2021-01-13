@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col, Grid } from 'antd';
 import { NftCard } from './NftCard';
-import { getNftList, NFT } from '../utils/nfts';
+import { getNftList } from '../utils/nfts';
 import ButtonViewMore from './ButtonViewMore';
 
 const { useBreakpoint } = Grid;

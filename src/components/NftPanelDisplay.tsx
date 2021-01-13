@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Row, Button } from 'antd';
+import { Col, Row } from 'antd';
 import { NftCard } from './NftCard';
 import { NFT } from '../utils/nfts';
 import ButtonViewMore from './ButtonViewMore';
