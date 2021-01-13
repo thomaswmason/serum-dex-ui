@@ -7,11 +7,20 @@ import {
   useQuoteFromMarketAddress,
   useSupply,
 } from '../utils/nfts/utils';
+import { getExceptionalStyle } from '../utils/nfts';
 import { useHistory } from 'react-router-dom';
 import LazyLoad from 'react-lazyload';
 
-export const RedeemableTag = (): JSX.Element => {
-  return <div className="redeemable-tag">Redeemable</div>;
+interface TagI {
+  style?: any;
+}
+
+export const RedeemableTag = (prop: TagI): JSX.Element => {
+  return (
+    <div className="redeemable-tag" style={prop.style}>
+      Redeemable
+    </div>
+  );
 };
 
 export const OwnedTag = () => {
@@ -39,7 +48,9 @@ export const NftCard = ({
   }
   return (
     <div className="nft-card" onClick={onClick}>
-      {nft.redeembable && <RedeemableTag />}
+      {nft.redeembable && (
+        <RedeemableTag style={getExceptionalStyle(nft.mintAddress)} />
+      )}
       {nft.type === 'IMAGE' ? (
         <LazyLoad height={300}>
           <img
@@ -49,15 +60,24 @@ export const NftCard = ({
           />
         </LazyLoad>
       ) : (
-        <LazyLoad height={300}>
-          <video width="400" muted loop autoPlay playsInline>
-            <source
-              // @ts-ignore
-              src={nft.imgSmall}
-              type="video/mp4"
-            />
-          </video>
-        </LazyLoad>
+        <>
+          <LazyLoad height={300}>
+            <video
+              width="400"
+              muted
+              loop
+              autoPlay
+              playsInline
+              style={getExceptionalStyle(nft.mintAddress)}
+            >
+              <source
+                // @ts-ignore
+                src={nft.imgSmall}
+                type="video/mp4"
+              />
+            </video>
+          </LazyLoad>
+        </>
       )}
       <div className="bottom">
         <Row justify="space-between">

@@ -1,3 +1,4 @@
+import { mintTo } from '@project-serum/serum/lib/token-instructions';
 import { PublicKey } from '@solana/web3.js';
 
 enum NFT_Types {
@@ -355,18 +356,17 @@ export default NFTS;
 
 export const REDEEMABLE_NFTS: NFT[] = [
   new NFT(
-    require('../../assets/nfts/AgdBQN2Sy2abiZ2KToWeUsQ9PHdCv95wt6kVWRf5zDkx/AgdBQN2Sy2abiZ2KToWeUsQ9PHdCv95wt6kVWRf5zDkx.jpg'),
-    require('../../assets/nfts/AgdBQN2Sy2abiZ2KToWeUsQ9PHdCv95wt6kVWRf5zDkx/small.jpg'),
-    'Bitcoin Tram',
+    require('../../assets/nfts/94w8qHS4XFadqJhWZzyfAS2bbj55ReFnVYB8BwewMNmf/94w8qHS4XFadqJhWZzyfAS2bbj55ReFnVYB8BwewMNmf.gif'),
+    require('../../assets/nfts/94w8qHS4XFadqJhWZzyfAS2bbj55ReFnVYB8BwewMNmf/small.mp4'),
+    'SRM Socks',
     5,
-    new PublicKey('AgdBQN2Sy2abiZ2KToWeUsQ9PHdCv95wt6kVWRf5zDkx'),
-    new PublicKey('CWkuMPt24aZFA4sHTUs43zwp3N8Lh9UfKNAScQqQ8uUg'),
+    new PublicKey('94w8qHS4XFadqJhWZzyfAS2bbj55ReFnVYB8BwewMNmf'),
+    new PublicKey('H4WRoAMyGAxtTX5dLsvFYkxCgLXWjMUdWpNqST8E3jzx'),
     true,
-    ['bitcoin', 'tram', 'hong', 'kong'],
-    NFT_Types.IMAGE,
-    new PublicKey('FCHmpXY6AQifAwe6SjAEGfF6APTPEcCjyNFAHn83ijdb'),
-    'This NFT can be redeemed for a physical Bitcoin Tram model mailed to your door',
-    '2020-11-06T21:00:00.000+08:00',
+    ['srm', 'serum', 'sock', 'kong'],
+    NFT_Types.VIDEO,
+    new PublicKey('9QTrBTjooTK4NQ5QkYQGUNkyo8grpMrrmjMXAh3bJVtd'),
+    'This NFT can be redeemed for a physical pair of Serum Socks mailed to your door',
   ),
   new NFT(
     require('../../assets/nfts/7TRzvCqXN8KSXggbSyeEG2Z9YBBhEFmbtmv6FLbd4mmd/7TRzvCqXN8KSXggbSyeEG2Z9YBBhEFmbtmv6FLbd4mmd.jpg'),
@@ -395,6 +395,20 @@ export const REDEEMABLE_NFTS: NFT[] = [
     'This NFT can be redeemed for a Ledger Nano X branded Serum mailed to your door. The market will be unlisted on 30/11/2020 at 9pm UTC +8. After this date you will only be able to redeem.',
     '2020-11-30T21:00:00.000+08:00',
   ),
+  new NFT(
+    require('../../assets/nfts/AgdBQN2Sy2abiZ2KToWeUsQ9PHdCv95wt6kVWRf5zDkx/AgdBQN2Sy2abiZ2KToWeUsQ9PHdCv95wt6kVWRf5zDkx.jpg'),
+    require('../../assets/nfts/AgdBQN2Sy2abiZ2KToWeUsQ9PHdCv95wt6kVWRf5zDkx/small.jpg'),
+    'Bitcoin Tram',
+    5,
+    new PublicKey('AgdBQN2Sy2abiZ2KToWeUsQ9PHdCv95wt6kVWRf5zDkx'),
+    new PublicKey('CWkuMPt24aZFA4sHTUs43zwp3N8Lh9UfKNAScQqQ8uUg'),
+    true,
+    ['bitcoin', 'tram', 'hong', 'kong'],
+    NFT_Types.IMAGE,
+    new PublicKey('FCHmpXY6AQifAwe6SjAEGfF6APTPEcCjyNFAHn83ijdb'),
+    'This NFT can be redeemed for a physical Bitcoin Tram model mailed to your door',
+    '2020-11-06T21:00:00.000+08:00',
+  ),
 ];
 
 export const ALL = [...REDEEMABLE_NFTS, ...NFTS];
@@ -421,4 +435,13 @@ export const getRedeemableNftList = () => {
 
 export const getNonRedeemableNftList = () => {
   return NFTS;
+};
+
+export const getExceptionalStyle = (mint: PublicKey): any => {
+  switch (mint.toBase58()) {
+    case '94w8qHS4XFadqJhWZzyfAS2bbj55ReFnVYB8BwewMNmf':
+      return { top: 80 };
+    default:
+      return null;
+  }
 };
