@@ -464,10 +464,10 @@ const TradePanel = (): JSX.Element | null => {
         <Col>
           <h1 className="title">{nft.name}</h1>
         </Col>
-        <Col style={{ marginTop: 20, paddingLeft: 20, paddingRight: 10 }}>
+        <Col style={{ paddingLeft: 20, paddingRight: 10 }}>
           {nft.redeembable && <RedeemableTag />}
         </Col>
-        {hasNft && <Col style={{ marginTop: 20 }}>{true && <OwnedTag />}</Col>}
+        {hasNft && <Col>{true && <OwnedTag />}</Col>}
       </Row>
       <Line />
       <Row align="middle" justify="space-around" style={{ height: '80%' }}>
