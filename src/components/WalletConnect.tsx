@@ -24,7 +24,7 @@ export const Dot = () => {
 export default function WalletConnect(): JSX.Element {
   const { connected, wallet } = useWallet();
   const publicKey = wallet?.publicKey;
-  const history = useHistory(0);
+  const history = useHistory();
 
   const styles = {
     menu: {
