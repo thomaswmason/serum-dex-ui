@@ -60,7 +60,7 @@ const TradeForm = ({ nft }: { nft: NFT }): JSX.Element => {
         setOpenOrder(o);
       }
     });
-  }, [loaded, nft, openOrders]);
+  }, [loaded]);
 
   useEffect(() => {
     balances?.forEach((b) => {
@@ -69,7 +69,7 @@ const TradeForm = ({ nft }: { nft: NFT }): JSX.Element => {
         setHasNft(true);
       }
     });
-  }, [balances, openOrders, nft]);
+  }, []);
 
   const { market } = useMarket();
   const bestBid = useBestBid(market?.address);
