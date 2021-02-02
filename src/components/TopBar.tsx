@@ -1,11 +1,9 @@
-import { SettingOutlined } from '@ant-design/icons';
-import { Button, Col, Popover, Row, Select } from 'antd';
 import React from 'react';
+import { Button, Col, Popover, Row, Select } from 'antd';
 import { useHistory } from 'react-router-dom';
 import logo from '../assets/solible-logo.svg';
 import styled from 'styled-components';
 import { useWallet, WALLET_PROVIDERS } from '../utils/wallet';
-
 import WalletConnect from './WalletConnect';
 import SearchBar from './SearchBar';
 

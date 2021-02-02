@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Row, Col, Dropdown, Menu } from 'antd';
 import { useWallet } from '../utils/wallet';
 import { abbreviateAddress } from '../utils/utils';
 import Settings from './Settings';
-import { DisconnectOutlined, AppstoreOutlined } from '@ant-design/icons';
+import {
+  DisconnectOutlined,
+  AppstoreOutlined,
+  CheckCircleOutlined,
+} from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
+
+import { settleAllFunds } from '../utils/send';
+import {
+  useAllMarkets,
+  useSelectedTokenAccounts,
+  useTokenAccounts,
+} from '../utils/markets';
+import { useConnection } from '../utils/connection';
+import { notify } from '../utils/notifications';
 
 const { Item } = Menu;
 
@@ -40,6 +53,52 @@ export default function WalletConnect(): JSX.Element {
     },
   };
 
+  const connection = useConnection();
+
+  const [selectedTokenAccounts] = useSelectedTokenAccounts();
+  const [allMarkets, allMarketsConnected] = useAllMarkets();
+  const [tokenAccounts, tokenAccountsConnected] = useTokenAccounts();
+
+  const onSettleFunds = async () => {
+    try {
+      if (!tokenAccounts || !tokenAccountsConnected) {
+        notify({
+          message: 'Error settling funds',
+          description: 'TokenAccounts not connected',
+          type: 'error',
+        });
+        return;
+      }
+      if (!allMarkets || !allMarketsConnected) {
+        notify({
+          message: 'Error settling funds',
+          description: 'Markets not connected',
+          type: 'error',
+        });
+        return;
+      }
+      await settleAllFunds({
+        connection,
+        tokenAccounts,
+        selectedTokenAccounts,
+        wallet,
+        markets: allMarkets.map((marketInfo) => marketInfo.market),
+      });
+    } catch (e) {
+      notify({
+        message: 'Error settling funds',
+        description: e.message,
+        type: 'error',
+      });
+    } finally {
+      notify({
+        message: 'Funds settled',
+        description: 'All funds settled',
+        type: 'success',
+      });
+    }
+  };
+
   const ConnectedDropDown = (
     <Menu style={styles.menu}>
       <Item>
@@ -55,6 +114,14 @@ export default function WalletConnect(): JSX.Element {
             <AppstoreOutlined style={styles.icon} />
           </Col>
           <Col>Collection</Col>
+        </Row>
+      </Item>
+      <Item onClick={() => onSettleFunds()} style={styles.item}>
+        <Row align="middle" justify="start">
+          <Col style={styles.col}>
+            <CheckCircleOutlined style={styles.icon} />
+          </Col>
+          <Col>Settle</Col>
         </Row>
       </Item>
       <Item onClick={wallet.disconnect} style={styles.item}>
