@@ -24,6 +24,7 @@ import { placeOrder, cancelOrder } from '../utils/send';
 import { notify } from '../utils/notifications';
 import { useSendConnection, useConnection } from '../utils/connection';
 import { useHistory } from 'react-router-dom';
+import { getProgramAccounts } from '../utils/wallet';
 
 const { useBreakpoint } = Grid;
 
@@ -35,7 +36,7 @@ const TradeForm = ({ nft }: { nft: NFT }): JSX.Element => {
   const history = useHistory();
   const [bidPrice, setBidPrice] = useState<string | null>(null);
   const [askPrice, setAskPrice] = useState<string | null>(null);
-  const { wallet } = useWallet();
+  const { wallet, connected } = useWallet();
   const [hasNft, setHasNft] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const balances = useBalances();
@@ -70,6 +71,19 @@ const TradeForm = ({ nft }: { nft: NFT }): JSX.Element => {
       }
     });
   }, []);
+
+  useEffect(() => {
+    const get = async () => {
+      let result = await getProgramAccounts(wallet?.publicKey);
+      result = result?.map((t) => t?.account?.data?.parsed?.info?.mint);
+      return result;
+    };
+    get().then((result) => {
+      if (result?.includes(nft.mintAddress.toBase58())) {
+        setHasNft(true);
+      }
+    });
+  }, [connected]);
 
   const { market } = useMarket();
   const bestBid = useBestBid(market?.address);
