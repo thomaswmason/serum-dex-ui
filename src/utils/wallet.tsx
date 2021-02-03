@@ -4,6 +4,8 @@ import { notify } from './notifications';
 import { useConnectionConfig } from './connection';
 import { useLocalStorageState } from './utils';
 import { WalletContextValues } from './types';
+import { PublicKey } from '@solana/web3.js';
+import { rpcRequest } from './utils';
 
 export const WALLET_PROVIDERS = [
   { name: 'sollet.io', url: 'https://www.sollet.io' },
@@ -96,3 +98,25 @@ export function useWallet() {
     providerName: context.providerName,
   };
 }
+
+export const getProgramAccounts = async (pubkey: PublicKey) => {
+  const params = [
+    'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA',
+    {
+      encoding: 'jsonParsed',
+      filters: [
+        {
+          dataSize: 165,
+        },
+        {
+          memcmp: {
+            offset: 32,
+            bytes: pubkey?.toBase58(),
+          },
+        },
+      ],
+    },
+  ];
+  const result = await rpcRequest('getProgramAccounts', params);
+  return result;
+};

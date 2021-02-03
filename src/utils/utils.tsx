@@ -3,7 +3,7 @@ import { PublicKey, Connection, AccountInfo } from '@solana/web3.js';
 import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import BN from 'bn.js';
 import { getTokenAccountInfo } from './tokens';
-import { connect } from 'http2';
+import { MAINNET_ENDPOINT } from './connection';
 
 export function isValidPublicKey(key) {
   if (!key) {
@@ -199,4 +199,32 @@ export const useTokenAccounts = (owner: PublicKey, connection: Connection) => {
     get();
   }, [owner]);
   return { balances: tokenAccounts, loaded };
+};
+
+export const rpcRequest = async (method: string, params: any) => {
+  try {
+    let response = await fetch(MAINNET_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        jsonrpc: '2.0',
+        id: 1,
+        method: method,
+        params: params,
+      }),
+    });
+    if (!response.ok) {
+      return [];
+    }
+    if (response.status !== 200 || !response.ok) {
+      throw new Error(`Error rpcRequest `);
+    }
+    let json = await response.json();
+    return json.result;
+  } catch (err) {
+    console.error(err);
+    throw new Error(`Error rpcRequest = ${err}`);
+  }
 };
