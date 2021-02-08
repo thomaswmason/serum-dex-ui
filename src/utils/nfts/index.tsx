@@ -449,6 +449,17 @@ const NFTS: NFT[] = [
     ['sustained', 'burn'],
     NFT_Types.VIDEO,
   ),
+  new NFT(
+    require('../../assets/nfts/EWLVDZ7hNBxEADSDazaKtB81MAi1TNkDXmVuyYz6kKbn/EWLVDZ7hNBxEADSDazaKtB81MAi1TNkDXmVuyYz6kKbn.png'),
+    require('../../assets/nfts/EWLVDZ7hNBxEADSDazaKtB81MAi1TNkDXmVuyYz6kKbn/small.png'),
+    'CME ETH',
+    1,
+    new PublicKey('EWLVDZ7hNBxEADSDazaKtB81MAi1TNkDXmVuyYz6kKbn'),
+    new PublicKey('C6qqVbBeYrW4g2NVdbRjARPfuPpAYScQbW7m7eA41soH'),
+    false,
+    ['cme', 'eth'],
+    NFT_Types.IMAGE,
+  ),
 ];
 
 export default NFTS;

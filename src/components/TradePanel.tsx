@@ -66,7 +66,6 @@ const TradeForm = ({ nft }: { nft: NFT }): JSX.Element => {
   useEffect(() => {
     balances?.forEach((b) => {
       if (b.wallet && b.coin === nft.name && b.wallet > 0) {
-        console.log('balance', b);
         setHasNft(true);
       }
     });
@@ -75,13 +74,21 @@ const TradeForm = ({ nft }: { nft: NFT }): JSX.Element => {
   useEffect(() => {
     const get = async () => {
       let result = await getProgramAccounts(wallet?.publicKey);
-      result = result?.map((t) => t?.account?.data?.parsed?.info?.mint);
+
+      result = result?.map((t) => {
+        return {
+          mint: t?.account?.data?.parsed?.info?.mint,
+          amount: t?.account?.data?.parsed?.info?.tokenAmount?.uiAmount,
+        };
+      });
       return result;
     };
     get().then((result) => {
-      if (result?.includes(nft.mintAddress.toBase58())) {
-        setHasNft(true);
-      }
+      result?.forEach((e) => {
+        if (e.mint === nft.mintAddress.toBase58() && e.amount > 0) {
+          setHasNft(true);
+        }
+      });
     });
   }, [connected]);
 
