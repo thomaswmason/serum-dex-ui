@@ -519,6 +519,19 @@ export const REDEEMABLE_NFTS: NFT[] = [
     'This NFT can be redeemed for a physical Bitcoin Tram model mailed to your door',
     '2020-11-06T21:00:00.000+08:00',
   ),
+  new NFT(
+    require('../../assets/nfts/Etwjv2bTbXhgRFgJqMwG2LG6PQXPvVknQi4BMbjGQwJB/Etwjv2bTbXhgRFgJqMwG2LG6PQXPvVknQi4BMbjGQwJB.JPG'),
+    require('../../assets/nfts/Etwjv2bTbXhgRFgJqMwG2LG6PQXPvVknQi4BMbjGQwJB/small.JPG'),
+    'DOGE',
+    1,
+    new PublicKey('Etwjv2bTbXhgRFgJqMwG2LG6PQXPvVknQi4BMbjGQwJB'),
+    new PublicKey('4hmeyB32Kcm8ZSGR4ELVqUh4n6pu2dRqa1Y1pZMB4uve'),
+    true,
+    ['doge', 'painting'],
+    NFT_Types.IMAGE,
+    new PublicKey('7aMoYNa3M6r1F4QrkPmUPpjRtEXbDaNpaWkFXW1wvNuj'),
+    'This NFT can be redeemed for the real painting',
+  ),
 ];
 
 export const ALL = [...REDEEMABLE_NFTS, ...NFTS];
