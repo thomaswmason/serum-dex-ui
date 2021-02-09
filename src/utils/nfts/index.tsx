@@ -502,7 +502,7 @@ export const REDEEMABLE_NFTS: NFT[] = [
     ['doge', 'painting'],
     NFT_Types.IMAGE,
     new PublicKey('7aMoYNa3M6r1F4QrkPmUPpjRtEXbDaNpaWkFXW1wvNuj'),
-    'This NFT can be redeemed for the real painting',
+    'This NFT can be redeemed for the real painting mailed to your door',
     '2021-02-14T21:00:00.000+08:00',
   ),
   new NFT(

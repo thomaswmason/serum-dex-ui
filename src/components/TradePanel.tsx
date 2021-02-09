@@ -457,6 +457,24 @@ const TradeForm = ({ nft }: { nft: NFT }): JSX.Element => {
           <AddressLink address={nft.mintAddress} />
         </Col>
       </Row>
+      {nft.description && (
+        <Row
+          justify="space-between"
+          align="middle"
+          style={{ paddingTop: 20, paddingBottom: 20 }}
+        >
+          {nft.description}
+        </Row>
+      )}
+      {nft.redeemDescription && (
+        <Row
+          justify="space-between"
+          align="middle"
+          style={{ paddingTop: 20, paddingBottom: 20 }}
+        >
+          {nft.redeemDescription}
+        </Row>
+      )}
       {nft.redeembable &&
         nft.auctionDeadLine &&
         new Date().getTime() < Date.parse(nft.auctionDeadLine) && (
