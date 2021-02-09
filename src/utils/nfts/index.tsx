@@ -460,6 +460,28 @@ const NFTS: NFT[] = [
     ['cme', 'eth'],
     NFT_Types.IMAGE,
   ),
+  new NFT(
+    require('../../assets/nfts/ZyqV5jBYqcffWkaxcPPL9pFEXGkL3feGNFQy46PNj4R/ZyqV5jBYqcffWkaxcPPL9pFEXGkL3feGNFQy46PNj4R.jpg'),
+    require('../../assets/nfts/ZyqV5jBYqcffWkaxcPPL9pFEXGkL3feGNFQy46PNj4R/small.jpg'),
+    'Luther Blissett #0',
+    1,
+    new PublicKey('ZyqV5jBYqcffWkaxcPPL9pFEXGkL3feGNFQy46PNj4R'),
+    new PublicKey('GbJUTEyG1YUk2VKFkyQhcayMtMAsm88xk1sa9oW9g2cy'),
+    false,
+    ['luther', 'blissett', '#0'],
+    NFT_Types.IMAGE,
+  ),
+  new NFT(
+    require('../../assets/nfts/7Q5iKDEGBPdu9G46Wif9c7vX25rE3E9pVyNrbomzKQz/7Q5iKDEGBPdu9G46Wif9c7vX25rE3E9pVyNrbomzKQz.jpg'),
+    require('../../assets/nfts/7Q5iKDEGBPdu9G46Wif9c7vX25rE3E9pVyNrbomzKQz/small.jpg'),
+    'Luther Blissett #0/1',
+    1,
+    new PublicKey('7Q5iKDEGBPdu9G46Wif9c7vX25rE3E9pVyNrbomzKQz'),
+    new PublicKey('6fD7Jh2EhKTvfxByAi2v9ZqHbQoBLSJPU7gyveTh5Cn9'),
+    false,
+    ['luther', 'blissett', '#0/1'],
+    NFT_Types.IMAGE,
+  ),
 ];
 
 export default NFTS;
