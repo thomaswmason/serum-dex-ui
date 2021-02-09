@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Col, Row, Input, Space, Grid } from 'antd';
+import { Button, Col, Row, Input, Space, Grid, Statistic } from 'antd';
 import { findNftFromMarket } from '../utils/nfts/utils';
 import {
   useMarket,
@@ -27,6 +27,8 @@ import { useHistory } from 'react-router-dom';
 import { getProgramAccounts } from '../utils/wallet';
 
 const { useBreakpoint } = Grid;
+
+const { Countdown } = Statistic;
 
 const Line = () => {
   return <div className="line" />;
@@ -455,6 +457,14 @@ const TradeForm = ({ nft }: { nft: NFT }): JSX.Element => {
           <AddressLink address={nft.mintAddress} />
         </Col>
       </Row>
+      {nft.redeembable &&
+        nft.auctionDeadLine &&
+        new Date().getTime() < Date.parse(nft.auctionDeadLine) && (
+          <Countdown
+            title="Auction will end in"
+            value={Date.parse(nft.auctionDeadLine)}
+          />
+        )}
     </Space>
   );
 };
