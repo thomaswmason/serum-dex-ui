@@ -27,11 +27,21 @@ const CollectionPage = (): JSX.Element => {
   useEffect(() => {
     let intersection: NFT[] = [];
     const get = async () => {
+      if (!connected) {
+        return;
+      }
       let result = await getProgramAccounts(wallet?.publicKey);
-      result = result?.map((t) => t?.account?.data?.parsed?.info?.mint);
-      return result;
+      result = result?.map((t) => {
+        return {
+          amount: t?.account?.data?.parsed?.info?.tokenAmount?.uiAmount,
+          mint: t?.account?.data?.parsed?.info?.mint,
+        };
+      });
+
+      return result?.filter((e) => e.amount > 0);
     };
-    get().then((result) => {
+    get().then((r) => {
+      let result = r?.map((e) => e.mint);
       allNfts.forEach((x) => {
         if (result?.includes(x.mintAddress.toBase58())) {
           intersection.push(x);
@@ -39,7 +49,6 @@ const CollectionPage = (): JSX.Element => {
       });
     });
 
-    console.log(intersection);
     setNfts(intersection);
   }, [connected]);
 
