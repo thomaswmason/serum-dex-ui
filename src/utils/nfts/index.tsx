@@ -482,6 +482,17 @@ const NFTS: NFT[] = [
     ['luther', 'blissett', '#0/1'],
     NFT_Types.IMAGE,
   ),
+  new NFT(
+    require('../../assets/nfts/CHhyNFe17Xd9k7HA3tacdicftCdpS7QXzUcqY41ZbibN/CHhyNFe17Xd9k7HA3tacdicftCdpS7QXzUcqY41ZbibN.png'),
+    require('../../assets/nfts/CHhyNFe17Xd9k7HA3tacdicftCdpS7QXzUcqY41ZbibN/small.png'),
+    'Doge',
+    430,
+    new PublicKey('CHhyNFe17Xd9k7HA3tacdicftCdpS7QXzUcqY41ZbibN'),
+    new PublicKey('2fu9wSLUqTaFTuthh77UQo1VDmUQWxstitpFVn83io49'),
+    false,
+    ['doge'],
+    NFT_Types.IMAGE,
+  ),
 ];
 
 export default NFTS;
