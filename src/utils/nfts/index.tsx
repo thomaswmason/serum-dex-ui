@@ -493,6 +493,17 @@ const NFTS: NFT[] = [
     ['doge'],
     NFT_Types.IMAGE,
   ),
+  new NFT(
+    require('../../assets/nfts/CQMAqmZZrBdLeyuYde8G55epEfcJPzvopUZrMtDKG4W3/CQMAqmZZrBdLeyuYde8G55epEfcJPzvopUZrMtDKG4W3.jpg'),
+    require('../../assets/nfts/CQMAqmZZrBdLeyuYde8G55epEfcJPzvopUZrMtDKG4W3/small.jpg'),
+    'SBF worked hard',
+    1,
+    new PublicKey('CQMAqmZZrBdLeyuYde8G55epEfcJPzvopUZrMtDKG4W3'),
+    new PublicKey('7iGPwQrLfWmUhuWc2a2c8KwveW5sqShziEbV4Y17SA2U'),
+    false,
+    ['sbf', 'worked', 'hard'],
+    NFT_Types.IMAGE,
+  ),
 ];
 
 export default NFTS;
