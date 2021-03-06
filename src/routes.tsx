@@ -14,7 +14,7 @@ export function Routes() {
         <BasicLayout>
           <Switch>
             <Route exact path="/">
-              <HomePage />
+              <ExplorePage />
             </Route>
             <Route exact path="/explore">
               <ExplorePage />

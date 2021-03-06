@@ -24,11 +24,9 @@ const ExplorePage = (): JSX.Element => {
             <h1 className="explore-page-title">
               Search results for: {keywords.toString()}
             </h1>
-          ) : (
-            <h1 className="explore-page-title">Explore NFTs</h1>
-          )}
+          ) : null}
         </Col>
-        <Col>Sort options</Col>
+        {/* <Col>Sort options</Col> */}
       </Row>
       {productRows.map((row, idx) => {
         return (
