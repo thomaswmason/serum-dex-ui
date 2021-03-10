@@ -8,7 +8,7 @@ import { NFT } from './';
 export const DISABLE_SELL = ['327ubUZkUUAEdeWvyQYh1Ycs9mt6yDnt7jDAW47U3krw'];
 export const PUBLIC_KEY_GOD = 'BJa7dq3bRP216zaTdw4cdcV71WkPc1HXvmnGeFVDi5DC';
 
-const programId = new PublicKey('EUqojwWA2rd19FZrzeBncJsm38Jm1hEhE3zsmX3bRc2o');
+const programId = new PublicKey('9xQeWvG816bUx9EPjHmaT23yvVM2ZWbrrpZb9PusVFin');
 
 export const hasMoreImages = (publicKeyString: string): [any, boolean] => {
   switch (publicKeyString) {

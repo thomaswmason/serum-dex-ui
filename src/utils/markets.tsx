@@ -56,7 +56,7 @@ getNftList().forEach((nft) => {
   USE_MARKETS.push({
     name: nft.name,
     address: nft.marketAddress,
-    programId: new PublicKey('EUqojwWA2rd19FZrzeBncJsm38Jm1hEhE3zsmX3bRc2o'),
+    programId: new PublicKey('9xQeWvG816bUx9EPjHmaT23yvVM2ZWbrrpZb9PusVFin'),
     deprecated: false,
   });
   TOKEN_MINTS.push({
