@@ -72,6 +72,7 @@ export function useMarketsList() {
 export function useAllMarkets() {
   const connection = useConnection();
   const { customMarkets } = useCustomMarkets();
+  const [time, setTime] = useState(new Date().getTime());
 
   const getAllMarkets = async () => {
     const markets: Array<{
@@ -92,12 +93,16 @@ export function useAllMarkets() {
             marketName: marketInfo.name,
             programId: marketInfo.programId,
           };
-        } catch (e) {
-          notify({
-            message: 'Error loading all market',
-            description: e.message,
-            type: 'error',
-          });
+        } catch (err) {
+          const now = new Date().getTime();
+          if (now - time > 60 * 1_000) {
+            notify({
+              message: 'Error loading all market',
+              description: err.message,
+              type: 'error',
+            });
+          }
+          console.warn(`Error loading all markets - ${err.message}`);
           return null;
         }
       }),
