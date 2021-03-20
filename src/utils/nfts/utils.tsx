@@ -156,14 +156,17 @@ export const useSupply = (address: PublicKey): number | null => {
   return supply;
 };
 
-export const useTokenInfo = (address: PublicKey) => {
+export const useTokenInfo = (address: string | null) => {
   const [tokenAmount, setTokenAmount] = useState<TokenAmount | null>(null);
   const connection = useConnection();
   useEffect(() => {
     const get = async () => {
+      if (!address) {
+        return;
+      }
       try {
         await sleep(Math.random() * 2000);
-        const result = await connection.getTokenSupply(address);
+        const result = await connection.getTokenSupply(new PublicKey(address));
         setTokenAmount(result.value);
       } catch (err) {
         console.warn(`Error getting token info - ${err}`);

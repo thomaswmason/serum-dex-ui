@@ -2,8 +2,11 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { PublicKey, Connection, AccountInfo } from '@solana/web3.js';
 import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import BN from 'bn.js';
-import { getTokenAccountInfo } from './tokens';
+import { Market, MARKETS } from '@project-serum/serum';
 import { MAINNET_ENDPOINT } from './connection';
+
+// @ts-ignore
+const dexProgramId = MARKETS?.find(({ deprecated }) => !deprecated).programId;
 
 export function isValidPublicKey(key) {
   if (!key) {
@@ -226,5 +229,22 @@ export const rpcRequest = async (method: string, params: any) => {
   } catch (err) {
     console.error(err);
     throw new Error(`Error rpcRequest = ${err}`);
+  }
+};
+
+export const isValidMarket = async (
+  connection: Connection,
+  marketAddress: string,
+) => {
+  try {
+    const market = await Market.load(
+      connection,
+      new PublicKey(marketAddress),
+      {},
+      dexProgramId,
+    );
+    return true;
+  } catch (err) {
+    return false;
   }
 };
