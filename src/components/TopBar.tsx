@@ -20,33 +20,47 @@ const LogoWrapper = styled.div`
   }
 `;
 
+const styles = {
+  explore: {
+    cursor: 'pointer',
+  },
+  addNft: {
+    marginRight: 70,
+    marginLeft: 70,
+    cursor: 'pointer',
+  },
+  faq: {
+    marginRight: 70,
+    cursor: 'pointer',
+  },
+  mainRow: { background: '#121837' },
+  childRow: { fontWeight: 600, fontSize: 16 },
+};
+
 export default function TopBar(): JSX.Element {
   const { connected, wallet, providerUrl, setProvider } = useWallet();
-
   const history = useHistory();
-
   return (
     <>
-      <Row
-        align="middle"
-        justify="space-around"
-        style={{ background: '#121837' }}
-      >
+      <Row align="middle" justify="space-around" style={styles.mainRow}>
         <LogoWrapper onClick={() => history.push('/')}>
           <img src={logo} alt="" />
           {'Solible'}
         </LogoWrapper>
         <SearchBar />
         <Col>
-          <Row justify="space-around" style={{ fontWeight: 600, fontSize: 16 }}>
+          <Row justify="space-around" style={styles.childRow}>
             <Col
-              style={{ cursor: 'pointer' }}
+              style={styles.explore}
               onClick={() => history.push('/explore')}
             >
               EXPLORE
             </Col>
+            <Col style={styles.addNft} onClick={() => history.push('/list')}>
+              ADD NFT
+            </Col>
             <Col
-              style={{ paddingRight: 70, paddingLeft: 70, cursor: 'pointer' }}
+              style={styles.faq}
               onClick={() =>
                 (window.location.href = 'https://help.bonfida.com')
               }

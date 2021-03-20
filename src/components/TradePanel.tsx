@@ -11,12 +11,7 @@ import {
   useOpenOrders,
 } from '../utils/markets';
 import { NFT } from '../utils/nfts';
-import {
-  useQuoteFromMarketAddress,
-  useBestAsk,
-  useBestBid,
-  useSupply,
-} from '../utils/nfts/utils';
+import { useNftInfo } from '../utils/nfts/utils';
 import { AddressLink } from './ExplorerLink';
 import { RedeemableTag, OwnedTag } from './NftCard';
 import { useWallet } from '../utils/wallet';
@@ -95,10 +90,10 @@ const TradeForm = ({ nft }: { nft: NFT }): JSX.Element => {
   }, [connected]);
 
   const { market } = useMarket();
-  const bestBid = useBestBid(market?.address);
-  const bestAsk = useBestAsk(market?.address);
-  const quote = useQuoteFromMarketAddress(market?.address);
-  const supply = useSupply(nft.mintAddress);
+  const { bestBid, bestAsk, quoteCurrency: quote, supply } = useNftInfo(
+    nft.mintAddress,
+    market?.address,
+  );
 
   const placeBid = async () => {
     if (!bidPrice) {

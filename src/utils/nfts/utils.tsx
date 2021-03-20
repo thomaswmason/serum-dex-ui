@@ -176,3 +176,58 @@ export const useTokenInfo = (address: string | null) => {
   }, [connection]);
   return tokenAmount;
 };
+
+export const useNftInfo = (
+  mintAddress: PublicKey,
+  marketAddress: PublicKey | null | undefined,
+) => {
+  const [quote, setQuote] = useState<string | undefined>(undefined);
+  const [bestAsk, setBestAsk] = useState<null | number>(null);
+  const [supply, setSupply] = useState<number | null>(null);
+  const [bestBid, setBestBid] = useState<number | null>(null);
+
+  const connection = useConnection();
+
+  useEffect(() => {
+    const get = async (): Promise<void> => {
+      if (!marketAddress) {
+        return;
+      }
+      // Market data
+      try {
+        let market = await Market.load(
+          connection,
+          marketAddress,
+          {},
+          programId,
+        );
+        let quoteMint = market.quoteMintAddress;
+        let asks = await market.loadAsks(connection);
+        await sleep(Math.random() * 1_000);
+        let bids = await market.loadBids(connection);
+        const bb = bids.getL2(1);
+        const ba = asks.getL2(1);
+        setBestAsk(ba[0] && ba[0][0] ? ba[0][0] : null);
+        setBestBid(bb[0] && bb[0][0] ? bb[0][0] : null);
+        setQuote(
+          TOKEN_MINTS.find(
+            (token) => token.address.toBase58() === quoteMint.toBase58(),
+          )?.name,
+        );
+        await sleep(Math.random() * 1_000);
+        // Token data
+        const _supply = await connection.getTokenSupply(mintAddress);
+        setSupply(_supply.value.uiAmount);
+      } catch (err) {
+        console.warn(`Error fetching NFT data - ${err}`);
+      }
+    };
+    get();
+  }, [connection, mintAddress, marketAddress]);
+  return {
+    quoteCurrency: quote,
+    bestAsk: bestAsk,
+    supply: supply,
+    bestBid: bestBid,
+  };
+};

@@ -1,12 +1,7 @@
 import React from 'react';
 import { Col, Row } from 'antd';
 import { PublicKey } from '@solana/web3.js';
-import {
-  findNftFromMint,
-  useBestAsk,
-  useQuoteFromMarketAddress,
-  useSupply,
-} from '../utils/nfts/utils';
+import { findNftFromMint, useNftInfo } from '../utils/nfts/utils';
 import { getExceptionalStyle } from '../utils/nfts';
 import { useHistory } from 'react-router-dom';
 import LazyLoad from 'react-lazyload';
@@ -33,9 +28,10 @@ export const NftCard = ({
   mintAddress: PublicKey;
 }): JSX.Element | null => {
   const nft = findNftFromMint(mintAddress);
-  const bestAsk = useBestAsk(nft?.marketAddress);
-  const quoteCurrency = useQuoteFromMarketAddress(nft?.marketAddress);
-  const supply = useSupply(mintAddress);
+  const { bestAsk, supply, quoteCurrency } = useNftInfo(
+    mintAddress,
+    nft?.marketAddress,
+  );
 
   const history = useHistory();
 
