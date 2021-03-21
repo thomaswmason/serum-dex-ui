@@ -19,18 +19,46 @@ const footerElements = [
   { description: 'Bonfida', link: helpUrls.bonfida },
 ];
 
+const styles = {
+  footer: {
+    height: '60px',
+    paddingBottom: 10,
+    paddingTop: 10,
+    background: '#121837',
+  },
+  link: {
+    color: 'rgba(255, 255, 255, 0.6)',
+    textTransform: 'uppercase',
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
+  discord: {
+    height: 25,
+    cursor: 'pointer',
+  },
+  telegram: {
+    height: 20,
+    marginRight: 25,
+    marginLeft: 25,
+    cursor: 'pointer',
+  },
+  twitter: {
+    height: 20,
+    cursor: 'pointer',
+  },
+  ipfs: {
+    color: 'rgba(255, 255, 255, 0.6)',
+    textTransform: 'uppercase',
+    marginTop: 10,
+    marginLeft: 10,
+  } as React.CSSProperties,
+};
+
 export const CustomFooter = () => {
   const smallScreen = !useBreakpoint().lg;
 
   return (
-    <Footer
-      style={{
-        height: '60px',
-        paddingBottom: 10,
-        paddingTop: 10,
-        background: '#121837',
-      }}
-    >
+    <Footer style={styles.footer}>
       <Row align="middle" justify="space-around">
         <Col>
           <img src={logo} alt="" />
@@ -43,12 +71,7 @@ export const CustomFooter = () => {
                   key={`footer-elem-${index}-${elem.description}`}
                   external
                   to={elem.link}
-                  style={{
-                    color: 'rgba(255, 255, 255, 0.6)',
-                    textTransform: 'uppercase',
-                    paddingLeft: 20,
-                    paddingRight: 20,
-                  }}
+                  style={styles.link}
                 >
                   {elem.description}
                 </Link>
@@ -59,24 +82,19 @@ export const CustomFooter = () => {
         <Col>
           <img
             src={discord}
-            style={{ height: 25, cursor: 'pointer' }}
+            style={styles.discord}
             onClick={() => (window.location.href = helpUrls.discord)}
             alt=""
           />
           <img
             src={telegram}
-            style={{
-              height: 20,
-              marginRight: 25,
-              marginLeft: 25,
-              cursor: 'pointer',
-            }}
+            style={styles.telegram}
             onClick={() => (window.location.href = helpUrls.telegram)}
             alt=""
           />
           <img
             src={twitter}
-            style={{ height: 20, cursor: 'pointer' }}
+            style={styles.twitter}
             onClick={() => (window.location.href = helpUrls.twitter)}
             alt=""
           />
