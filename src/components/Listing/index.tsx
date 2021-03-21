@@ -72,7 +72,7 @@ const ListingExplainer = () => {
             account
           </li>
           <li>
-            You need to mint the token you want to mint. It needs to be a token
+            You need to mint the token you want to list. It needs to be a token
             with 0 decimals. You can mint tokens here{' '}
             <Link external to={URLS.mint}>
               SPL Token Creator
