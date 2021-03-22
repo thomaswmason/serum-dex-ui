@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Select, Form, Input, Button, Typography } from 'antd';
 import { isValidPublicKey, isValidMarket } from '../../utils/utils';
 import { notify } from '../../utils/notifications';
 import { useConnection } from '../../utils/connection';
-import { PublicKey } from '@solana/web3.js';
+import { PublicKey, Connection } from '@solana/web3.js';
 import { NFT } from '../../utils/nfts';
 import Link from '../Link';
 
@@ -172,30 +172,6 @@ const Listing = () => {
   const [type, setType] = useState('IMAGE');
   const [githubText, setGithubText] = useState<JSX.Element | null>(null);
 
-  useEffect(() => {
-    const getInfo = async () => {
-      if (!isValidPublicKey(mint)) {
-        console.log('not valid');
-        return;
-      }
-
-      try {
-        const result = await connection.getTokenSupply(new PublicKey(mint));
-        setDecimals(result.value.decimals.toString());
-        setSupply(result.value.amount);
-        if (result.value.decimals > 0) {
-          notify({
-            message: 'Decimals need to be 0',
-            type: 'error',
-          });
-        }
-      } catch (err) {
-        console.warn(err);
-      }
-    };
-    getInfo();
-  }, [connection, isValidPublicKey(mint)]);
-
   const handleChangeName = (e) => {
     setName(e.target.value);
   };
@@ -210,6 +186,10 @@ const Listing = () => {
 
   const handleChangeType = (v) => {
     setType(v);
+  };
+
+  const handleChangeSupply = (e) => {
+    setSupply(e.target.value.trim());
   };
 
   const handleChangeIpfsSmall = (e) => {
@@ -252,14 +232,7 @@ const Listing = () => {
     setMarket(e.target.value.trim());
   };
 
-  const canSubmit =
-    name &&
-    mint &&
-    parseFloat(decimals) === 0 &&
-    parseFloat(supply) > 0 &&
-    ipfsSmall &&
-    ipfs &&
-    market;
+  const canSubmit = name && mint && ipfsSmall && ipfs && market && supply;
 
   const submit = async () => {
     const validMarket = await isValidMarket(connection, market);
@@ -317,11 +290,8 @@ const Listing = () => {
           <Form.Item label="Mint">
             <Input value={mint} onChange={handleChangeMint} />
           </Form.Item>
-          <Form.Item label="Decimals">
-            <Input disabled value={decimals} />
-          </Form.Item>
           <Form.Item label="Supply">
-            <Input disabled value={supply} />
+            <Input value={supply} onChange={handleChangeSupply} />
           </Form.Item>
           <Form.Item label="NFT Type">
             <Select defaultValue="IMAGE" onChange={handleChangeType}>
