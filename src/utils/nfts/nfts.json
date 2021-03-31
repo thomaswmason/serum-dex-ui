@@ -1,5 +1,20 @@
 [
     {
+      "img": "https://gateway.pinata.cloud/ipfs/QmU2RR48LwpGoskQe8pdJoqAS9n32LD6uaRX4CExjSCyvU/cope.png",
+      "imgSmall": "https://gateway.pinata.cloud/ipfs/QmaFoYJ2SPbth7Cx9zQkAQQWd2NWeTkQrEAH2CBJraNpXv/cope-preview.png",
+      "name": "Share a Cope",
+      "supply": 420,
+      "mintAddress": "FFsj4ikaHT3uitnCQ9aNLMEPNfuqY4LcfsZsHGyNGRSd",
+      "marketAddress": "DRaRPxct6r63DUGxTs1zGqvYRCeFF6if9kpL1jcXCWwt",
+      "redeembable": false,
+      "keywords": [
+        "Share",
+        "a",
+        "Cope"
+      ],
+      "type": "IMAGE"
+    },
+    {
       "img": "https://gateway.pinata.cloud/ipfs/QmfFrkRRv4Lanpe3dEK3p1rRdKwspZXh8kBWLXZBRJaRyy/FBycjnjoUW9hZh6a4VzkLCoYzFgjQBjHgbBhNuxZv3WA/FBycjnjoUW9hZh6a4VzkLCoYzFgjQBjHgbBhNuxZv3WA.gif",
       "imgSmall": "https://gateway.pinata.cloud/ipfs/QmfFrkRRv4Lanpe3dEK3p1rRdKwspZXh8kBWLXZBRJaRyy/FBycjnjoUW9hZh6a4VzkLCoYzFgjQBjHgbBhNuxZv3WA/small.mp4",
       "name": "FIDA - NFT.",
