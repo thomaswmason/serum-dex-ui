@@ -437,5 +437,19 @@
         "towel"
       ],
       "type": "IMAGE"
-    }
+    },
+    {
+  "img": "https://gateway.pinata.cloud/ipfs/QmbRYqGpJfvqehMbTHgPn9CfmWbv4Ue1yWPq7XGZZ1DpjP/banana-1-highres.png",
+  "imgSmall": "https://gateway.pinata.cloud/ipfs/QmYehWXanJaeCqXM4TZA8Ty4SgQcKhVJ6nEDU8agNZCj4D?filename=banana-1.png",
+  "name": "SolFruit#1 Banana",
+  "supply": 1,
+  "mintAddress": "3ca39HYCe9gtfht2boueG5JSzn6hZyDme9kLMeYDcMng",
+  "marketAddress": "9kRqeywxVNvPAWGLqkMngxWUiobaVGrgD7Q5EnPo2ogw",
+  "redeembable": false,
+  "keywords": [
+    "SolFruit#1",
+    "Banana"
+  ],
+  "type": "IMAGE"
+}
   ]
