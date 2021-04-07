@@ -451,5 +451,20 @@
     "Banana"
   ],
   "type": "IMAGE"
+},
+{
+  "img": "https://gateway.pinata.cloud/ipfs/QmQpduRt5HvXSErUo8R4ab3X4W7iAaegCsJVY4z6RnkzN8",
+  "imgSmall": "https://gateway.pinata.cloud/ipfs/QmfY6Rjn97yERqots54Vhe59hpRkidbAMeXGPCEDCyq8N8",
+  "name": "Forgive me Alfi",
+  "supply": 1,
+  "mintAddress": "DiWL1hZyDrHdbAAf57yWvjvRs2FZmkxTpzzbiFDGKreh",
+  "marketAddress": "6gybCqpMdAzaACT7gXeEXxypvhV65ao2KxesrHYKRtGj",
+  "redeembable": false,
+  "keywords": [
+    "Forgive",
+    "me",
+    "Alfi"
+  ],
+  "type": "IMAGE"
 }
   ]
